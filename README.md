@@ -1,6 +1,8 @@
 # Skinnier Colorbox
 This is a modified version of Jack Moore's Colorbox plugin for front-end developers. It removes extraneous HTML and CSS, and replaces IDs with classes to make CSS overrides easier.
 
+Demo: http://skymaiden.github.io/colorbox/
+
 ## About Colorbox:
 A customizable lightbox plugin for jQuery.  See the [project page](http://jacklmoore.com/colorbox/) for documentation and a demonstration, and the [FAQ](http://jacklmoore.com/colorbox/faq/) for solutions and examples to common issues.  Released under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
