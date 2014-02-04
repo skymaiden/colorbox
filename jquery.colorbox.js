@@ -99,10 +99,6 @@
 	$box,
 	$wrap,
 	$content,
-	$topBorder,
-	$leftBorder,
-	$rightBorder,
-	$bottomBorder,
 	$related,
 	$window,
 	$loaded,
@@ -146,7 +142,7 @@
 		var element = document.createElement(tag);
 
 		if (id) {
-			element.id = prefix + id;
+			element.className = prefix + id;
 		}
 
 		if (css) {
@@ -378,8 +374,8 @@
 				$content.css({width:'', height:''}).append($loaded);
 
 				// Cache values needed for size calculations
-				interfaceHeight = $topBorder.height() + $bottomBorder.height() + $content.outerHeight(true) - $content.height();
-				interfaceWidth = $leftBorder.width() + $rightBorder.width() + $content.outerWidth(true) - $content.width();
+				interfaceHeight = $content.outerHeight(true) - $content.height();
+				interfaceWidth = $content.outerWidth(true) - $content.width();
 				loadedHeight = $loaded.outerHeight(true);
 				loadedWidth = $loaded.outerWidth(true);
 
@@ -432,39 +428,25 @@
 				tabindex: '-1'
 			}).hide();
 			$overlay = $tag(div, "Overlay").hide();
-			$loadingOverlay = $([$tag(div, "LoadingOverlay")[0],$tag(div, "LoadingGraphic")[0]]);
+			$loadingOverlay = $($tag(div, "LoadingGraphic")[0]);
 			$wrap = $tag(div, "Wrapper");
 			$content = $tag(div, "Content").append(
 				$title = $tag(div, "Title"),
 				$current = $tag(div, "Current"),
-				$prev = $('<button type="button"/>').attr({id:prefix+'Previous'}),
-				$next = $('<button type="button"/>').attr({id:prefix+'Next'}),
+				$prev = $('<button type="button"/>').attr({class:prefix+'Previous'}),
+				$next = $('<button type="button"/>').attr({class:prefix+'Next'}),
 				$slideshow = $tag('button', "Slideshow"),
 				$loadingOverlay
 			);
 
-			$close = $('<button type="button"/>').attr({id:prefix+'Close'});
-			
-			$wrap.append( // The 3x3 Grid that makes up Colorbox
-				$tag(div).append(
-					$tag(div, "TopLeft"),
-					$topBorder = $tag(div, "TopCenter"),
-					$tag(div, "TopRight")
-				),
-				$tag(div, false, 'clear:left').append(
-					$leftBorder = $tag(div, "MiddleLeft"),
-					$content,
-					$rightBorder = $tag(div, "MiddleRight")
-				),
-				$tag(div, false, 'clear:left').append(
-					$tag(div, "BottomLeft"),
-					$bottomBorder = $tag(div, "BottomCenter"),
-					$tag(div, "BottomRight")
-				)
-			).find('div div').css({'float': 'left'});
-			
+			$close = $('<button type="button"/>').attr({class:prefix+'Close'});
+
+			$wrap.append(
+				$content
+			);
+
 			$loadingBay = $tag(div, false, 'position:absolute; width:9999px; visibility:hidden; display:none; max-width:none;');
-			
+
 			$groupControls = $next.add($prev).add($current).add($slideshow);
 
 			$(document.body).append($overlay, $box.append($wrap, $loadingBay));
@@ -633,8 +615,7 @@
 		$wrap[0].style.width = $wrap[0].style.height = "9999px";
 		
 		function modalDimensions() {
-			$topBorder[0].style.width = $bottomBorder[0].style.width = $content[0].style.width = (parseInt($box[0].style.width,10) - interfaceWidth)+'px';
-			$content[0].style.height = $leftBorder[0].style.height = $rightBorder[0].style.height = (parseInt($box[0].style.height,10) - interfaceHeight)+'px';
+			$content[0].style.height = (parseInt($box[0].style.height,10) - interfaceHeight)+'px';
 		}
 
 		css = {width: settings.w + loadedWidth + interfaceWidth, height: settings.h + loadedHeight + interfaceHeight, top: top, left: left};
