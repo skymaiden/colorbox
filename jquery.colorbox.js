@@ -433,13 +433,13 @@
 			$content = $tag(div, "Content").append(
 				$title = $tag(div, "Title"),
 				$current = $tag(div, "Current"),
-				$prev = $('<button type="button"/>').attr({class:prefix+'Previous'}),
-				$next = $('<button type="button"/>').attr({class:prefix+'Next'}),
+				$prev = $('<button type="button"/>').attr({'class':prefix+'Previous'}),
+				$next = $('<button type="button"/>').attr({'class':prefix+'Next'}),
 				$slideshow = $tag('button', "Slideshow"),
 				$loadingOverlay
 			);
 
-			$close = $('<button type="button"/>').attr({class:prefix+'Close'});
+			$close = $('<button type="button"/>').attr({'class':prefix+'Close'});
 
 			$wrap.append(
 				$content
@@ -854,6 +854,10 @@
 			publicMethod.position(speed, callback);
 		}
 	};
+
+    publicMethod.reload = function () {
+        load();
+    };
 
 	function load () {
 		var href, setResize, prep = publicMethod.prep, $inline, request = ++requests;
